@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-primary: 255, 255, 255;
+    --bg-secondary: 248, 250, 252;
+  }
+  
+  .dark {
+    --bg-primary: 2, 6, 23;
+    --bg-secondary: 15, 23, 42;
+  }
+
+  body {
+    @apply font-sans antialiased text-slate-900 dark:text-slate-100;
+    background-color: rgb(var(--bg-primary));
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-outfit tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl border border-white/20 dark:border-slate-800/50 shadow-2xl;
+  }
+  
+  .glass-morphism {
+    @apply bg-white/40 dark:bg-slate-900/40 backdrop-blur-lg border border-white/20 dark:border-slate-800/30;
+  }
+
+  .nav-link-active {
+    @apply bg-primary-500/10 text-primary-600 dark:text-primary-400 font-semibold shadow-[0_0_20px_rgba(14,165,233,0.15)];
+  }
+}
+
+/* Dynamic Background Patterns */
+.bg-mesh {
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(200, 100%, 80%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(220, 100%, 80%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(240, 100%, 80%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(260, 100%, 80%, 0.1) 0px, transparent 50%);
+}
+
+.dark .bg-mesh {
+  background-image: 
+    radial-gradient(at 0% 0%, hsla(200, 100%, 20%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(220, 100%, 20%, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, hsla(240, 100%, 20%, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, hsla(260, 100%, 20%, 0.1) 0px, transparent 50%);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-200 dark:bg-slate-800 rounded-full hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors;
+}
+
+/* Transition for theme switching */
+* {
+  transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+  transition-duration: 300ms;
+}
