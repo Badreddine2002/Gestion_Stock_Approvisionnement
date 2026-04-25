@@ -18,7 +18,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // 1. Nettoyage
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if (DB::getDriverName() === 'sqlite') {
+            DB::statement('PRAGMA foreign_keys = OFF;');
+        } else {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
+        
         User::truncate();
         Role::truncate();
         Category::truncate();
@@ -26,7 +31,12 @@ class DatabaseSeeder extends Seeder
         Product::truncate();
         StockEntry::truncate();
         StockExit::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        
+        if (DB::getDriverName() === 'sqlite') {
+            DB::statement('PRAGMA foreign_keys = ON;');
+        } else {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
         // 2. Création des rôles
         $adminRole = Role::create(['name' => 'admin']);
